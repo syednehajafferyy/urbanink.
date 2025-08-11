@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UrbanInk</title>
+  <link rel="icon" type="image/png" href="./urbanink_black_drop_logo_small.png">
+  <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; }
+
+.navbar {
+  background-color: #000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.logo span {
+  color: #FF69B4;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+.nav-links li a:hover {
+  color: #fc0a83;
+}
+
+
+    .hero {
+      height: auto;
+      padding: 3rem 1rem;
+      background-color: #111;
+      color: #eb57a1;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #eee;
+    }
+
+    .shop-now button {
+      background-color: #ff69b4;
+      color: black;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .shop-now button:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
+    }
+   
+
+    .models {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+    }
+
+    .model-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+      height: 500px;
+    }
+
+    .model-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .model-card:hover { transform: scale(1.05); }
+    .model-card:active { transform: scale(0.98); }
+
+    .products {
+      padding: 2rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .product h3 { margin: 0.5rem 0; }
+
+    .product button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    
+
+    footer {
+      background: #111;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    footer .payment {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    #final-message {
+      padding: 2rem 1rem;
+      background: #ff69b4;
+      color: black;
+      font-size: 1.3rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        padding: 0;
+      }
+
+      .nav-links li {
+        margin: 5px 0;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .shop-now button {
+        font-size: 0.85rem;
+      }
+    }
+    /* your existing styles unchanged... */
+
+    /* Cart Styles */
+    #cart {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: #fff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      width: 250px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 1000;
+    }
+    #cart h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: #000;
+    }
+    #cart-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    #cart-items li {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    #cart-total {
+      font-weight: bold;
+    }
+    .cart-btn {
+      background: #ff69b4;
+      color: #000;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .add-to-cart {
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: linear-gradient(135deg, #cf3ca3, #fad0c4);
+  transform: translateY(-2px);
+}
+
+.add-to-cart:active {
+  transform: translateY(1px);
+}
+.checkout-btn {
+  background: linear-gradient(135deg, #4cafef, #007bff);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background: linear-gradient(135deg, #5bc0ff, #339dff);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.checkout-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">Urban<span>I</span>nk</div>
+
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">Men</a></li>
+    <li><a href="#">Women</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  <!-- Cart Toggle Button -->
+  <button class="cart-btn" onclick="toggleCart()">Cart (<span id="cart-count">0</span>)</button>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="shop-now">
+      <h1><span>GRAPHIC PRINTED</span><br>APPAREL</h1>
+      <p>Discover the boldest designs.<br>Urban fashion that speaks for you.</p>
+      <button onclick="scrollToProducts()">SHOP NOW</button>
+    </div>
+  </div>
+</div>
+
+<!-- Models -->
+<section class="models">
+  <div class="model-card"><img src="./ hoodiemod1.jpg" alt="Model 1"></div>
+  <div class="model-card"><img src="./hoodiemod2.jpg" alt="Model 2"></div>
+  <div class="model-card"><img src="./hoodiemod3.jpg" alt="Model 3"></div>
+  <div class="model-card"><img src="./hoodiemod4.jpg" alt="Model 4"></div>
+</section>
+
+<!-- Products -->
+<section class="products" id="product-list"></section>
+
+<!-- Cart -->
+<div id="cart">
+  <h2>Your Cart</h2>
+  <ul id="cart-items"></ul>
+  <p>Total: $<span id="cart-total">0</span></p>
+  <button class="checkout-btn" onclick="fakeCheckout()">Checkout</button>
+
+</div>
+
+<!-- Final Message -->
+<div id="final-message">
+  We exclusively sell GRAPHIC PRINTED APPAREL – Bold. Loud. You.
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 UrbanInk. All rights reserved.</p>
+  <div class="payment">
+    Payment Integration: Visa, Mastercard, Stripe, Easypaisa (Coming Soon)
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  const products = [];
+
+  // Generate T-Shirts
+  for (let i = 1; i <= 100; i++) {
+    const imgNum = (i % 9) || 9;
+    products.push({
+      id: i,
+      name: `T-Shirt #${i}`,
+      price: 20,
+      img: `/products/shirt${imgNum}.jpg`
+    });
+  }
+
+  // Generate Hoodies
+  const hoodieCount = 6;
+  for (let i = 101; i <= 150; i++) {
+    const imgNum = ((i - 100 - 1) % hoodieCount) + 1;
+    products.push({
+      id: i,
+      name: `Hoodie #${i - 100}`,
+      price: 40,
+      img: `/products/hoodie${imgNum}.jpg`,
+    });
+  }
+
+  const productList = document.getElementById('product-list');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const cartCount = document.getElementById('cart-count');
+  const cartBox = document.getElementById('cart');
+
+  let cart = [];
+
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    cart.push(product);
+    updateCart();
+  }
+
+  function updateCart() {
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price;
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - $${item.price}`;
+      cartItems.appendChild(li);
+    });
+    cartTotal.textContent = total;
+    cartCount.textContent = cart.length;
+  }
+
+  function scrollToProducts() {
+    document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function toggleCart() {
+    cartBox.style.display = cartBox.style.display === 'none' || cartBox.style.display === '' ? 'block' : 'none';
+  }
+
+  function renderProducts() {
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product';
+      card.innerHTML = `
+        <img src="${product.img}" alt="${product.name}" style="width:100%; height:auto; border-radius: 10px;">
+        <h3>${product.name}</h3>
+        <p>Price: $${product.price}</p>
+        <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+      `;
+      productList.appendChild(card);
+    });
+  }
+  function fakeCheckout() {
+  alert("✅ Payment successful! Thank you for your order.");
+}
+
+
+  renderProducts();
+</script>
+</body>
+</html>
